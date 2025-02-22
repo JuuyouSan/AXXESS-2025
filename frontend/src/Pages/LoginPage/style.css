@@ -7,7 +7,7 @@
   }
   
   .login-page .background-image { 
-    background-image: url(https://c.animaapp.com/fZZ9VZSR/img/login-page.png);
+    background-image: url("public/assets/background.png");
     background-position: center;
     background-size: 100% 120%;
     background-repeat: no-repeat;
