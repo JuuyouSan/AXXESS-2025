@@ -5,3 +5,6 @@ requests==2.31.0      # For making HTTP requests
 werkzeug==3.0.1       # WSGI utilities, required by Flask
 pytest==8.0.2         # For testing
 gunicorn==21.2.0      # Production WSGI server 
+torch==2.6.0
+torchvision==0.21.0
+openai==1.64.0
