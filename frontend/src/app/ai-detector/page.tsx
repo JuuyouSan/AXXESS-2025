@@ -48,11 +48,7 @@ export default function AIDetector() {
 
       const response = await fetch('http://localhost:5000/upload', {
         method: 'POST',
-        body: formData,
-        headers: {
-          // Don't set Content-Type header manually when sending FormData
-          // It will be set automatically with the correct boundary
-        }
+        body: formData
       })
 
       if (!response.ok) {
@@ -60,7 +56,10 @@ export default function AIDetector() {
       }
 
       const data = await response.json()
-      console.log('Upload successful:', data)
+      console.log('Analysis result:', data)
+      
+      // Store the result in localStorage for the results page
+      localStorage.setItem('analysisResult', JSON.stringify(data.result))
       router.push("/results")
     } catch (error) {
       console.error('Upload error:', error)

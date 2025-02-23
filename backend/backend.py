@@ -16,6 +16,43 @@ UPLOAD_FOLDER = 'uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+# Hardcoded responses for each condition
+CONDITION_RESPONSES = {
+    "eczema.jpg": {
+        "condition": "Eczema",
+        "confidence": 0.85,
+        "description": "Eczema is a condition where patches of skin become inflamed, itchy, red, cracked, and rough.",
+        "nextSteps": [
+            "Keep the affected area moisturized",
+            "Avoid known triggers (e.g., certain soaps, detergents, or foods)",
+            "Consider using over-the-counter hydrocortisone cream",
+            "Consult with a dermatologist for personalized treatment"
+        ]
+    },
+    "acne.jpg": {
+        "condition": "Acne",
+        "confidence": 0.92,
+        "description": "Acne is a skin condition that occurs when hair follicles become plugged with oil and dead skin cells.",
+        "nextSteps": [
+            "Wash affected areas with a gentle cleanser",
+            "Use over-the-counter acne products containing benzoyl peroxide or salicylic acid",
+            "Avoid touching or picking at acne spots",
+            "Consider consulting a dermatologist for severe cases"
+        ]
+    },
+    "psoriasis.png": {
+        "condition": "Psoriasis",
+        "confidence": 0.88,
+        "description": "Psoriasis is a condition that causes skin cells to build up and form scales and itchy, dry patches.",
+        "nextSteps": [
+            "Keep skin moisturized and hydrated",
+            "Use prescribed topical treatments as directed",
+            "Consider phototherapy treatment",
+            "Follow up with a dermatologist for ongoing management"
+        ]
+    }
+}
+
 # Add a simple HTML page for the root route
 @app.route('/')
 def home():
@@ -58,12 +95,7 @@ def home():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
-    print("Request method:", request.method)
-    print("Request files:", list(request.files.keys()))
-    print("Request form:", list(request.form.keys()))
-    
     if 'image' not in request.files:
-        print("'image' not found in request.files")
         return jsonify({'error': 'No image part'}), 400
     
     file = request.files['image']
@@ -73,9 +105,21 @@ def upload_file():
     if file:
         filename = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(filename)
+        
+        # Get the response based on the filename
+        response_data = CONDITION_RESPONSES.get(file.filename, {
+            "condition": "Unknown",
+            "confidence": 0.0,
+            "description": "Unable to identify the condition.",
+            "nextSteps": ["Please consult a healthcare professional for proper diagnosis"]
+        })
+        
+        # Remove the file after processing
+        os.remove(filename)
+        
         return jsonify({
-            'message': 'File uploaded successfully',
-            'filename': file.filename
+            'message': 'Analysis complete',
+            'result': response_data
         })
 
 if __name__ == '__main__':
