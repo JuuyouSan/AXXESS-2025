@@ -24,13 +24,13 @@ model = models.convnext_tiny(weights="IMAGENET1K_V1")
 
 # ✅ Modify classifier for 22 skin disease classes
 num_features = model.classifier[2].in_features
-model.fc = nn.Sequential(
+model.classifier = nn.Sequential(
     nn.Flatten(),
     nn.Dropout(0.5),
     nn.Linear(num_features, 22)  # ✅ Only 22 classes instead of 1000
 )
 
-best_model_path = os.path.join(os.getcwd(), 'backend', 'model', 'best_model.pth')
+best_model_path = os.path.join(os.getcwd(), 'model', 'best_model.pth')
 
 # ✅ Move model to GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -64,9 +64,9 @@ def prompt_samba(message):
     system = """
 You are an AI skin disease diagnosis assistant. You will be provided two lists that represent the output of a skin disease classifier. The first list contains the predicted skin disease names in order of likelihood, and the second list contains the corresponding confidence scores. For example:
 
-["Eczema", "Psoriasis", "Rosacea", "Acne"][0.75, 0.70, 0.40, 0.15]
+["Eczema"][0.757]
 
-Please analyze these predictions and determine the most likely skin disease. If the top two predictions have similar confidence scores (within 5 percent of each other), then provide information for both conditions. For each condition, please provide:
+Please analyze these predictions and determine the most likely skin disease. For each condition, please provide:
 
 A brief description of the skin disease (including common symptoms and characteristics).
 A detailed, step-by-step set of recommendations on what to do next. Include at-home treatment suggestions if appropriate, and specify clear guidelines for when to seek medical advice (e.g., 'if the condition worsens or does not improve within X days, consult a doctor').
@@ -99,41 +99,39 @@ def predict_image(image_path, model):
         softmax = nn.Softmax(0)
         softmax_output = softmax(outputs)  # ✅ Get highest confidence class index
 
-    _, top_indices = torch.topk(softmax_output, k=3)
-    return softmax_output.tolist(), top_indices.tolist()
+    _, top_indices = torch.topk(softmax_output, k=1)
+    print(softmax_output.size(), top_indices.size())
+    return softmax_output.tolist(), top_indices.item()
 
-def get_confidence(confidences, top_indices):
-    top_3 = [confidences[i] for i in top_indices]
+def get_confidence(confidences, top_index):
     confidence_sum = sum(confidences)
-    top_confidences = [top_3[i]/confidence_sum for i in range(3)]
-    top_names = [classes[i] for i in top_indices]
+    top_confidence = max(confidences)
+    top_name = classes[top_index]
+    top_confidence = top_confidence / confidence_sum
 
-    return top_names, top_confidences
+    return top_name, top_confidence
 
 def give_response(filename):
     cwd = os.getcwd()
-    file_path = os.path.join(cwd, 'backend', 'uploads', filename)
+    file_path = os.path.join(cwd, filename)
+    print(file_path)
 
     output, top_indices = predict_image(file_path, model)
     names, confidences = get_confidence(output, top_indices)
-    prompt = str(names) + str(confidences)
-    json_string = prompt_samba(prompt)
-    json_data = json.loads(json_string)
+    # prompt = str(names) + str(confidences)
+    # json_string = prompt_samba(prompt)
+    # json_data = json.loads(json_string)
+    print(names, confidences)
+
+    return names, confidences
 
     condition = str()
     confidence = float()
-    if abs(confidences[0] - confidences[1]) <= 5:
-        condition = names[0] + " " + names[1]
-        condition = re.sub(r'_', ' ', condition)
-        condition = re.sub(r'[^a-zA-Z0-9\s]', '', condition)
-        condition = condition.title()
-        confidence = confidences[0] + confidences[1]
-    else:
-        condition = names[0].title()
-        condition = re.sub(r'_', ' ', condition)
-        condition = re.sub(r'[^a-zA-Z0-9\s]', '', condition)
-        confidence = confidences[0]
-    confidence = round(confidence * 100, 1)
+    condition = names[0].title()
+    condition = re.sub(r'_', ' ', condition)
+    condition = re.sub(r'[^a-zA-Z0-9\s]', '', condition)
+    confidence = confidences[0]
+    confidence = round(confidence, 3)
 
     result = {
             "condition": condition,
