@@ -143,7 +143,3 @@ def give_response(filename):
     }
     
     return result
-
-
-
-print(give_response('08LichenPlanusTongue.jpeg'))
