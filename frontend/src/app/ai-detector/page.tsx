@@ -42,11 +42,32 @@ export default function AIDetector() {
 
     setIsLoading(true)
 
-    // TODO: Implement actual image upload and processing logic here
-    setTimeout(() => {
-      setIsLoading(false)
+    try {
+      const formData = new FormData()
+      formData.append('image', file)
+
+      const response = await fetch('http://localhost:5000/upload', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          // Don't set Content-Type header manually when sending FormData
+          // It will be set automatically with the correct boundary
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error('Upload failed')
+      }
+
+      const data = await response.json()
+      console.log('Upload successful:', data)
       router.push("/results")
-    }, 2000)
+    } catch (error) {
+      console.error('Upload error:', error)
+      // Handle error appropriately
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
