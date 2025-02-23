@@ -30,8 +30,9 @@ yarn-error.log*
 
 # Environment files
 .env*
-.venv/
-venv/
+**/venv/
+**/.venv/
+
 
 # Vercel
 .vercel
