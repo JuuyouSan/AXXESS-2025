@@ -3,7 +3,7 @@ UTD AXXESS's hackathon for spring 2025
 
 # About the Project
 
-![GitHub Logo](https://github.com/frontend/public/logo.png)
+![GitHub Logo](https://github.com/main/frontend/public/logo.png)
 
 ## Inspiration  
 Initially, we considered an AI-powered healthcare application that analyzed cough sounds to diagnose infections. However, we faced technical challenges with MP4 conversions, making it difficult to process audio effectively within the time constraints.  
