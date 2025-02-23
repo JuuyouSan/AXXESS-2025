@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 const NavItem = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const pathname = usePathname()
@@ -46,7 +47,14 @@ const SiteLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="container flex h-16 items-center justify-between px-4 md:px-8">
           <div className="flex gap-6 md:gap-10">
             <Link href="/ai-detector" className="flex items-center space-x-2">
-              <span className="inline-block font-bold text-purple-900">Skin Insight</span>
+              <Image 
+                src="/logo.png"
+                alt="DeepSkin Logo"
+                width={32}
+                height={32}
+                className="h-8 w-auto"
+              />
+              <span className="inline-block font-bold text-purple-900">DeepSkin</span>
             </Link>
             <nav className="hidden md:flex gap-8 ml-8">
               <NavItem href="/ai-detector">AI Detector</NavItem>

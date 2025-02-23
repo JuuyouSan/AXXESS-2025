@@ -6,7 +6,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Skin Insight - AI Powered Skin Disease Detection",
+  title: "DeepSkin - AI Powered Skin Disease Detection",
   description: "Detect skin diseases using AI technology",
 }
 

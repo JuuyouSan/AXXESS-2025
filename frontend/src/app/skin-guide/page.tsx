@@ -27,6 +27,294 @@ const skinConditions = [
     ],
     treatments: ["Topical treatments", "Light therapy", "Oral or injected medications"],
   },
+  {
+    name: "Actinic Keratosis",
+    description: "A rough, scaly patch on the skin caused by long-term sun exposure, and it may be a precursor to skin cancer.",
+    symptoms: [
+      "Rough, dry, or scaly patches",
+      "Flat to slightly raised patches",
+      "Pink, red, or brown coloration",
+      "Itching or burning sensation"
+    ],
+    treatments: [
+      "Topical medications",
+      "Cryotherapy (freezing)",
+      "Photodynamic therapy",
+      "Regular skin examinations"
+    ],
+  },
+  {
+    name: "Benign Tumors",
+    description: "Non-cancerous growths on the skin that are generally harmless but may be removed for cosmetic reasons or if they cause discomfort.",
+    symptoms: [
+      "Raised or flat growths",
+      "Smooth or irregular surface",
+      "Various colors and sizes",
+      "May be painless"
+    ],
+    treatments: [
+      "Regular monitoring",
+      "Surgical removal if desired",
+      "Laser therapy",
+      "Cryotherapy"
+    ],
+  },
+  {
+    name: "Bullous Disorders",
+    description: "Conditions characterized by the formation of fluid-filled blisters (bullae) on the skin.",
+    symptoms: [
+      "Large fluid-filled blisters",
+      "Itching or burning sensation",
+      "Skin tenderness",
+      "Redness around blisters"
+    ],
+    treatments: [
+      "Corticosteroids",
+      "Immunosuppressive medications",
+      "Wound care",
+      "Protective bandaging"
+    ],
+  },
+  {
+    name: "Candidiasis",
+    description: "A fungal infection that causes red, itchy rashes, typically in warm and moist areas of the body.",
+    symptoms: [
+      "Red, itchy rash",
+      "White or yellow discharge",
+      "Burning sensation",
+      "Skin breakdown"
+    ],
+    treatments: [
+      "Antifungal medications",
+      "Keeping affected areas dry",
+      "Good hygiene practices",
+      "Avoiding irritants"
+    ],
+  },
+  {
+    name: "Drug Eruption",
+    description: "Adverse skin reactions resulting from medications, often presenting as rashes or hives.",
+    symptoms: [
+      "Sudden rash development",
+      "Itching or burning",
+      "Skin redness",
+      "Possible blistering"
+    ],
+    treatments: [
+      "Discontinuing triggering medication",
+      "Antihistamines",
+      "Topical corticosteroids",
+      "Medical evaluation"
+    ],
+  },
+  {
+    name: "Infestations and Bites",
+    description: "Skin reactions resulting from insect bites or parasitic infestations.",
+    symptoms: [
+      "Itching and redness",
+      "Raised bumps or welts",
+      "Skin irritation",
+      "Possible secondary infection"
+    ],
+    treatments: [
+      "Antiparasitic medications",
+      "Anti-itch creams",
+      "Proper cleaning",
+      "Prevention measures"
+    ],
+  },
+  {
+    name: "Lichen Planus",
+    description: "An inflammatory condition affecting the skin and mucous membranes, characterized by purplish, itchy, flat-topped bumps.",
+    symptoms: [
+      "Purple, itchy bumps",
+      "White lines on mucous membranes",
+      "Scalp inflammation",
+      "Nail changes"
+    ],
+    treatments: [
+      "Topical corticosteroids",
+      "Oral medications",
+      "UV light therapy",
+      "Stress management"
+    ],
+  },
+  {
+    name: "Lupus",
+    description: "An autoimmune disease that can cause inflammation and rashes on the skin, particularly on sun-exposed areas.",
+    symptoms: [
+      "Butterfly-shaped rash on face",
+      "Skin sensitivity to sunlight",
+      "Red, scaly patches",
+      "Hair loss"
+    ],
+    treatments: [
+      "Sun protection",
+      "Immunosuppressive medications",
+      "Topical treatments",
+      "Lifestyle modifications"
+    ],
+  },
+  {
+    name: "Moles",
+    description: "Common skin growths that can be flat or raised, typically brown in color, and usually harmless.",
+    symptoms: [
+      "Round or oval spots",
+      "Brown, black, or flesh-colored",
+      "Uniform or irregular shape",
+      "May change over time"
+    ],
+    treatments: [
+      "Regular monitoring",
+      "Professional skin checks",
+      "Surgical removal if suspicious",
+      "Documentation of changes"
+    ],
+  },
+  {
+    name: "Rosacea",
+    description: "A chronic inflammatory skin condition causing redness and visible blood vessels in the face.",
+    symptoms: [
+      "Facial redness",
+      "Visible blood vessels",
+      "Bumps and pimples",
+      "Skin sensitivity"
+    ],
+    treatments: [
+      "Topical medications",
+      "Oral antibiotics",
+      "Laser therapy",
+      "Trigger avoidance"
+    ],
+  },
+  {
+    name: "Seborrheic Keratosis",
+    description: "Common benign skin growths that often appear during middle age, resembling stuck-on warts.",
+    symptoms: [
+      "Waxy, scaly growths",
+      "Brown, black, or tan color",
+      "Raised, 'stuck-on' appearance",
+      "Various sizes"
+    ],
+    treatments: [
+      "Cryotherapy",
+      "Curettage",
+      "Laser treatment",
+      "Regular monitoring"
+    ],
+  },
+  {
+    name: "Skin Cancer",
+    description: "Abnormal growth of skin cells, typically developing on sun-exposed skin, with several types including melanoma, basal cell, and squamous cell carcinoma.",
+    symptoms: [
+      "New or changing moles",
+      "Unusual growths",
+      "Non-healing sores",
+      "Changes in skin appearance"
+    ],
+    treatments: [
+      "Surgical removal",
+      "Radiation therapy",
+      "Chemotherapy",
+      "Immunotherapy"
+    ],
+  },
+  {
+    name: "Sun/Sunlight Damage",
+    description: "Harmful effects of UV exposure on the skin, leading to premature aging and increased risk of skin cancer.",
+    symptoms: [
+      "Wrinkles and fine lines",
+      "Age spots",
+      "Uneven skin tone",
+      "Dry, rough texture"
+    ],
+    treatments: [
+      "Daily sunscreen use",
+      "Protective clothing",
+      "Antioxidant treatments",
+      "Skin repair products"
+    ],
+  },
+  {
+    name: "Tinea",
+    description: "A common fungal infection, often known as ringworm, causing red, itchy, and sometimes circular rashes.",
+    symptoms: [
+      "Circular, red rashes",
+      "Itching and burning",
+      "Scaly or cracked skin",
+      "Spreading rings"
+    ],
+    treatments: [
+      "Antifungal medications",
+      "Keeping skin dry",
+      "Good hygiene practices",
+      "Prevention of spread"
+    ],
+  },
+  {
+    name: "Vascular Tumors",
+    description: "Benign growths made up of blood vessels that can appear on or under the skin, ranging from birthmarks to acquired lesions.",
+    symptoms: [
+      "Red or purple growths",
+      "Raised or flat patches",
+      "May be warm to touch",
+      "Possible swelling"
+    ],
+    treatments: [
+      "Laser therapy",
+      "Surgical removal",
+      "Medication for larger lesions",
+      "Regular monitoring"
+    ],
+  },
+  {
+    name: "Vasculitis",
+    description: "Inflammation of blood vessels that can cause skin changes, including rashes, spots, and ulcers.",
+    symptoms: [
+      "Red or purple spots",
+      "Skin ulcers",
+      "Rashes or lesions",
+      "Tender or painful areas"
+    ],
+    treatments: [
+      "Corticosteroids",
+      "Immunosuppressive drugs",
+      "Wound care",
+      "Regular medical monitoring"
+    ],
+  },
+  {
+    name: "Vitiligo",
+    description: "A condition where patches of skin lose their pigment, resulting in white patches on various parts of the body.",
+    symptoms: [
+      "White patches on skin",
+      "Premature graying of hair",
+      "Loss of color in mouth/eyes",
+      "Patches that grow over time"
+    ],
+    treatments: [
+      "Topical medications",
+      "Light therapy",
+      "Skin camouflage",
+      "Depigmentation for extensive cases"
+    ],
+  },
+  {
+    name: "Warts",
+    description: "Small, rough growths on the skin caused by viral infections, particularly the human papillomavirus (HPV).",
+    symptoms: [
+      "Rough, raised bumps",
+      "May have black dots",
+      "Can be painful when pressed",
+      "May appear in clusters"
+    ],
+    treatments: [
+      "Cryotherapy",
+      "Topical medications",
+      "Laser treatment",
+      "Surgical removal"
+    ],
+  }
 ]
 
 export default function SkinGuide() {
