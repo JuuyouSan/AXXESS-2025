@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template_string
 from flask_cors import CORS
 import os
+from response import give_response
 
 app = Flask(__name__)
 CORS(app, resources={
@@ -107,13 +108,15 @@ def upload_file():
         file.save(filename)
         
         # Get the response based on the filename
-        response_data = CONDITION_RESPONSES.get(file.filename, {
-            "condition": "Unknown",
-            "confidence": 0.0,
-            "description": "Unable to identify the condition.",
-            "nextSteps": ["Please consult a healthcare professional for proper diagnosis"]
-        })
+        # response_data = CONDITION_RESPONSES.get(file.filename, {
+        #     "condition": "Unknown",
+        #     "confidence": 0.0,
+        #     "description": "Unable to identify the condition.",
+        #     "nextSteps": ["Please consult a healthcare professional for proper diagnosis"]
+        # })
         
+        response_data = give_response(filename)
+
         # Remove the file after processing
         os.remove(filename)
         
